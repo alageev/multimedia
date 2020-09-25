@@ -107,7 +107,7 @@ function checkEnding() {
     isSpinning = false
 }
 
-//ПРоверка результатов
+//Проверка результатов
 function checkResults(){
     let shownImages = []
     let allImagesAreEqual = true
