@@ -5,7 +5,6 @@ const context = canvas.getContext(`2d`)
 const sourceImage = new Image()
 const grayscaleImage = new Image()
 sourceImage.src = `Images/source@${resolution}x.jpg`
-// sourceImage.src = `Images/newSource@${resolution}x.jpg`
 grayscaleImage.src = `Images/grayscale@${resolution}x.jpg`
 const imageSize = sourceImage.width
 canvas.width = imageSize * 3 + 20
@@ -45,18 +44,18 @@ diff /= Math.pow(imageSize, 2)
 
 for (let i = 0; i < grayscaleData.length; i += 4){
     differences[grayscaleData[i]]++
-
+    grayscaleData[i    ] *= 255 / maxDifference
+    grayscaleData[i + 1] *= 255 / maxDifference
+    grayscaleData[i + 2] *= 255 / maxDifference
     if (grayscaleData[i] < 128){
-        grayscaleData[i] += 128 + diff
-        grayscaleData[i + 1] = 255
+        grayscaleData[i]     = 0
+        grayscaleData[i + 1] = grayscaleData[i + 1] * 2
+        grayscaleData[i + 2] = 255 - grayscaleData[i + 2] * 2
     } else {
-        grayscaleData[i] = 255
-        grayscaleData[i + 1] = (256 - grayscaleData[i + 1]) - diff
+        grayscaleData[i]     = grayscaleData[i]
+        grayscaleData[i + 1] = 255 - grayscaleData[i + 1]
+        grayscaleData[i + 2] = 0
     }
-
-    // grayscaleData[i] *= 255 / maxDifference
-    // grayscaleData[i + 1] = 255 - grayscaleData[i]
-    grayscaleData[i + 2] = 0
 }
 
 context.putImageData(myImageData, 2 * (imageSize + 10), 0, 0, 0, imageSize, imageSize)
