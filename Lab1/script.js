@@ -1,5 +1,5 @@
 //Параметры проекта
-const numberOfImages = 5
+const numberOfImages = 2
 const numberOfRolls = 3
 const spinningTime = 3
 const fps = 50
